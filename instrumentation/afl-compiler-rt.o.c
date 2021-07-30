@@ -1517,6 +1517,7 @@ void __cmplog_ins_hook1(uint8_t arg1, uint8_t arg2, uint8_t attr) {
   hits &= CMP_MAP_H - 1;
   __afl_cmp_map->log[k][hits].v0 = arg1;
   __afl_cmp_map->log[k][hits].v1 = arg2;
+  fprintf(stderr, "CMP: k=%u hits=%u len=%u\n", k, hits);
 
 }
 
@@ -1554,6 +1555,7 @@ void __cmplog_ins_hook2(uint16_t arg1, uint16_t arg2, uint8_t attr) {
   hits &= CMP_MAP_H - 1;
   __afl_cmp_map->log[k][hits].v0 = arg1;
   __afl_cmp_map->log[k][hits].v1 = arg2;
+  fprintf(stderr, "CMP: k=%u hits=%u len=%u\n", k, hits);
 
 }
 
@@ -1593,6 +1595,7 @@ void __cmplog_ins_hook4(uint32_t arg1, uint32_t arg2, uint8_t attr) {
   hits &= CMP_MAP_H - 1;
   __afl_cmp_map->log[k][hits].v0 = arg1;
   __afl_cmp_map->log[k][hits].v1 = arg2;
+  fprintf(stderr, "CMP: k=%u hits=%u len=%u\n", k, hits);
 
 }
 
@@ -1632,6 +1635,7 @@ void __cmplog_ins_hook8(uint64_t arg1, uint64_t arg2, uint8_t attr) {
   hits &= CMP_MAP_H - 1;
   __afl_cmp_map->log[k][hits].v0 = arg1;
   __afl_cmp_map->log[k][hits].v1 = arg2;
+  fprintf(stderr, "CMP: k=%u hits=%u len=%u\n", k, hits);
 
 }
 
@@ -1683,6 +1687,7 @@ void __cmplog_ins_hookN(uint128_t arg1, uint128_t arg2, uint8_t attr,
     __afl_cmp_map->log[k][hits].v1_128 = (u64)(arg2 >> 64);
 
   }
+  fprintf(stderr, "CMP: k=%u hits=%u len=%u\n", k, hits);
 
 }
 
@@ -1722,6 +1727,7 @@ void __cmplog_ins_hook16(uint128_t arg1, uint128_t arg2, uint8_t attr) {
   __afl_cmp_map->log[k][hits].v1 = (u64)arg2;
   __afl_cmp_map->log[k][hits].v0_128 = (u64)(arg1 >> 64);
   __afl_cmp_map->log[k][hits].v1_128 = (u64)(arg2 >> 64);
+  fprintf(stderr, "CMP: k=%u hits=%u len=%u\n", k, hits);
 
 }
 
@@ -1827,6 +1833,7 @@ void __sanitizer_cov_trace_switch(uint64_t val, uint64_t *cases) {
     __afl_cmp_map->log[k][hits].v0 = val;
     __afl_cmp_map->log[k][hits].v1 = cases[i + 2];
 
+    fprintf(stderr, "SWITCH: k=%u hits=%u len=%u\n", k, hits);
   }
 
 }
