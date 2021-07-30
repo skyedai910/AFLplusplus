@@ -1880,8 +1880,8 @@ void __cmplog_rtn_hook(u8 *ptr1, u8 *ptr2) {
   /**/
     u32 i;
 //    if (area_is_valid(ptr1, 32) <= 0 || area_is_valid(ptr2, 32) <= 0) return;
-+if (!ptr1 || !ptr2) return;
-+    fprintf(stderr, "__cmplog_rtn_hook %p %p\n", ptr1, ptr2);
+if (!ptr1 || !ptr2) return;
+    fprintf(stderr, "__cmplog_rtn_hook %p %p\n", ptr1, ptr2);
     fprintf(stderr, "rtn arg0=");
     for (i = 0; i < 32; i++)
       fprintf(stderr, "%02x", ptr1[i]);
@@ -1889,6 +1889,10 @@ void __cmplog_rtn_hook(u8 *ptr1, u8 *ptr2) {
     for (i = 0; i < 32; i++)
       fprintf(stderr, "%02x", ptr2[i]);
     fprintf(stderr, " ... %s %s\n", ptr1, ptr2);
+    if (area_is_valid(ptr1, 32) <= 0 || area_is_valid(ptr2, 32) <= 0) {
+      fprintf(stderr, "POISON!\n");
+    return;
+    }
   /**/
 
   if (likely(!__afl_cmp_map)) return;
