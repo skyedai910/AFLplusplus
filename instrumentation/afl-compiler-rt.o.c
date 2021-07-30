@@ -1934,7 +1934,7 @@ if (!ptr1 || !ptr2) return;
                    ptr1, len);
   __builtin_memcpy(((struct cmpfn_operands *)__afl_cmp_map->log[k])[hits].v1,
                    ptr2, len);
-  // fprintf(stderr, "RTN3\n");
+  fprintf(stderr, "RTN: k=%u hits=%u len=%u\n", k, hits, len);
 
 }
 
