@@ -60,16 +60,11 @@ COPY . /AFLplusplus
 WORKDIR /AFLplusplus
 
 RUN export CC=gcc-10 && export CXX=g++-10 && make clean && \
-    make distrib
+    make distrib STATIC=1
 
 RUN cd qemu_mode && ./build_qemu_support.sh && \
     cd .. && make install
 
-WORKDIR /
-RUN wget https://download.qemu.org/qemu-5.2.0.tar.xz && tar xvJf qemu-5.2.0.tar.xz && \
-    cd qemu-5.2.0 && ./configure --static && make -j4 && make install && make clean
-
-WORKDIR /AFLplusplus
 RUN sh -c 'echo set encoding=utf-8 > /root/.vimrc'
 RUN echo '. /etc/bash_completion' >> ~/.bashrc
 RUN echo 'alias joe="joe --wordwrap --joe_state -nobackup"' >> ~/.bashrc
