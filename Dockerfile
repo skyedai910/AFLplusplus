@@ -60,7 +60,10 @@ COPY . /AFLplusplus
 WORKDIR /AFLplusplus
 
 RUN export CC=gcc-10 && export CXX=g++-10 && make clean && \
-    make distrib && make install
+    make distrib
+
+RUN cd qemu_mode && CPU_TARGET=i386 ./build_qemu_support.sh && \
+    cd .. && make install
 
 RUN sh -c 'echo set encoding=utf-8 > /root/.vimrc'
 RUN echo '. /etc/bash_completion' >> ~/.bashrc
